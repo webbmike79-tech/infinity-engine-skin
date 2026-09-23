@@ -6,25 +6,25 @@ generated with Gemini and packaged for Godot Engine 4.
 ## Files
 
 - `infinity_skin.tres` — Godot 4 Theme: dark fieldstone panels, aged-parchment
-  insets, antique-brass buttons, parchment/ink label colors.
+  insets, antique-brass buttons (normal, hover, pressed, disabled, and focus
+  states), parchment/ink label colors.
 - `hud_controller.gd` — HUD controller script: hero name, health bar, scrolling
   parchment combat log, and action-bar slots (attack, class ability, spells,
-  rest) driven by a character dictionary ported from the app's data models.
+  rest). Node references are exported NodePaths (editable in the Inspector),
+  and button signals are connected in `_ready()` so no editor wiring is needed.
+  Override `load_character_data()` to pull live character data from your
+  Python/SQLite backend instead of the sample dictionary.
+- `hud.tscn` — ready-to-run scene with the full node tree the controller
+  expects. Open it in Godot 4 and press Play.
 
 ## Quick start
 
 1. Install [Godot Engine 4](https://godotengine.org/download) (free, open-source).
-2. Create a new project and a Control-layout scene with the node paths the
-   script expects:
-   - `$RightBar/HeroCard/VBox/LabelName`
-   - `$RightBar/HeroCard/VBox/HealthBar`
-   - `$BottomConsole/LogParchment/RichTextLabel`
-   - `$BottomBar/ActionGrid/BtnAbility`
-   - `$BottomBar/ActionGrid/BtnSpells`
-3. Import `infinity_skin.tres` as a Theme resource (or set the styles in the
-   inspector) and attach `hud_controller.gd` to the root interface node.
-4. Run the scene — the HUD populates from `active_character` and logs combat
-   actions to the parchment console.
+2. Copy the three files into a new Godot 4 project.
+3. Open `hud.tscn` and press Play — the HUD populates from
+   `active_character` and logs combat actions to the parchment console.
+4. To use your own scene layout, adjust the exported NodePaths on the
+   root Control in the Inspector.
 
 ## The Forgotten Realms flavor
 
